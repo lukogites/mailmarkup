@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.8.1/dist/alpine.min.js" defer></script>
+</head>
+
+<body>
+    <div class="container"
+        x-data="{
+            generateMarkup: false,
+            client_number: '',
+            site_type: '',
+            site_url: '',
+            site_login: '',
+            site_password: ''
+        }">
+        <div class="generator">
+            <div class="mt-5">
+                <h3 class="mb-4">E-mail markup generator</h3>
+                    <div class="mb-3">
+                        <label class="form-label">Numer klienta</label>
+                        <input type="text" maxlength="4" class="form-control" x-model="client_number">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Typ strony</label>
+                        <select class="form-select" x-model="site_type">
+                            <option value="">--Wybierz typ strony--</option>
+                            <option value="premium start">Premium start</option>
+                            <option value="wordpress edytowalny">Wordpress edytowalny</option>
+                            <option value="wordpress pełny">Wordpress pełna edycja</option>
+                            <option value="wordpress produktowy">Wordpress produktowy</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Końcowy adres URL strony</label>
+                        <input type="text" class="form-control" x-model="site_url">
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <label class="form-label">Login</label>
+                            <select class="form-select" x-model="site_login">
+                                <option value="">--Wybierz login--</option>
+                                <option value="imAdmin">imAdmin</option>
+                                <option value="administrator">administrator</option>
+                            </select>
+                        </div>
+                        <div class="col">
+                            <label class="form-label">Hasło</label>
+                            <input type="text" class="form-control" x-model="site_password">
+                        </div>
+                    </div>
+            </div>
+            <div class="mt-5">
+                <div class="alert alert-secondary">
+                    <p><strong>Temat:</strong></p>
+                    <template x-if="site_type !== ''">
+                        <p>
+                            <span x-text="client_number"></span>
+                            <span x-text="site_url"></span>
+                            <span>(<span x-text="site_type"></span>)</span>
+                            <span> - zakończenie cięcia</span>
+                        </p>
+                    </template>
+                    <template x-if="site_type == ''">
+                        <span>WYBIERZ TYP STRONY</span>
+                    </template>
+                </div>
+                <div class="alert alert-secondary">
+                    <div>
+                        <p><strong>Adres do strony internetowej:</strong></p>
+                        <template x-if="site_type == 'premium start'">
+                            <p>
+                                <span>http://inet-media.pl/<span x-text="site_url"></span></span>
+                            </p>
+                        </template>
+                        <template x-if="site_type !== 'premium start'">
+                            <p>
+                                <span>http://inet-media.com.pl/cms/<span x-text="site_url"></span></span>
+                            </p>
+                        </template>
+                    </div>
+                    <div>
+                        <p><strong>Adres do panelu zarządzania:</strong></p>
+                        <template x-if="site_type == 'premium start'">
+                            <p>
+                                <span>http://inet-media.pl/<span x-text="site_url"></span><span>/login</span></span>
+                            </p>
+                        </template>
+                        <template x-if="site_type !== 'premium start'">
+                            <p>
+                                <span>http://inet-media.com.pl/cms/<span x-text="site_url"></span><span>/login</span></span>
+                            </p>
+                        </template>
+                    </div>
+                    <div>
+                        <p><strong>Dane logowania:</strong></p>
+                        <p>
+                            <span>login:</span>
+                            <span x-text="site_login"></span>
+                        </p>
+                        <p>
+                            <span>hasło:</span>
+                            <span x-text="site_password"></span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
